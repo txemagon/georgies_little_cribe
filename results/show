@@ -1,0 +1,5 @@
+#!/bin/bash
+# Shows a file given in command line through gnuplot
+
+
+cat $1 | gnuplot -p -e "plot '<cat'"

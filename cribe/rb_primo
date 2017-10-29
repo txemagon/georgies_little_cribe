@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+# Figure out prime numbers
+
+
+def prime(n)
+    (2..n/2).each do |d|
+        return false if (n % d == 0)
+    end
+    return true
+end
+
+
+pot_of2  = 1
+prime_n  = 0
+
+
+1000000.times do |index|
+   pot_of2 = pot_of2 << 1
+   unless  ( ( (pot_of2 - 1) % (index+2)) != 0 )
+       factor = (pot_of2 - 1) / (index+2)
+       prime_n += 1
+       puts "Prime (#{prime_n}):#{index+2}" #if (factor % 3 == 0)
+   end
+end
+
+# Explanation
+# p is prime if 2^(p-1) - 1 % p == 0
+# And there would be a factor on the form of 3n such that
+# p * 3n = 2^(p-1) - 1
+# except for primes/non primes from the family of 3:
+# 3(1), 561(1), 645(2), 1905(2), 4371(2), 8481(1), 12801(1)
+# 18705(1), 23001(2), 25761(1), 33153(2), 55245(1), 62745(2)
+# (factor % 3 shown in parenthesis)
+
+# Errors
+# 341(11, 31) 1105(5,13,17) 1387(19,73) 1729(7,13,19) 2047(83,29)
+# 2465(5, 17, 29)  2701(73,37) 2821(31,13) 3277(113,29) 4033(109,37)
+# 4369(17,257), 4681(31,151) 5461(43,127) 6601(41,23) 7957(73,109)
+
+#Factors
+# 3                     3·5     = 2⁴-1 = 15
+# 9 = 3·3               9·7     = 2⁶-1 = 63  2⁵ is not present for 6 is not prime
+# 93 = 3·31             93·11   = 2¹⁰-1 = 1023
+# 315 = 3·3·5·7         315·13  = 2¹²-1 = 4095
+# 3855 = 257·5·3        3855·17 = 2¹⁶-1 = 65536
+
+#Addendum
+# So what's the matter with 341
+# 341 * factor = 2³⁴⁰-1
+# 11*31*factor =  2³⁴⁰-1
+# 11·f11 = (2¹⁰-1)
+# 31·f31 = (2³⁰-1)
+# 341·f11·f31 = (2¹⁰-1)·(2³⁰-1) = 2⁴⁰ - 2³⁰ - 2¹⁰ + 1
+

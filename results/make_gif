@@ -1,0 +1,12 @@
+#We will plot the histograms for the remainder of the sum cribe in this gif animation
+reset
+set term gif animate delay 1
+set output "remainder_10-1.gif"
+n=9    #n frames
+i=0
+set boxwidth 0.5
+set style fill solid
+set xrange [-1:7]
+set yrange [0:5]
+load "animate.gnuplot"
+set output

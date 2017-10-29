@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# Performs Little's George Cribe
+# Stands that every prime shoud accomplish
+# Sum(1,p-1) { (n^i - n^(i-1)) * n } % p == 0
+#
+# Where n is called scythe
+
+def pow_mod(base, exp, m)
+    result = 1
+    exp.times do |t|
+        result *= base
+        result %= m
+    end
+    result
+end
+
+scythe = 2     # Change it to the number you want
+pot    = 1
+last_pot = 0
+sum = 0
+n_primes = 0
+
+1000000.times do |index|
+    last_pot = pot
+    pot *= scythe
+    sum += (pot-last_pot) * scythe
+    if (sum % (index+2) == 0)
+        n_primes += 1
+        puts "(#{n_primes}) #{index+2}"
+    end
+end
+    puts "Density: #{n_primes / 1000000.0}"

@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+# prints out the sequence of 2 potencies sum mod the prime frequency
+
+t = 10000
+$hist = Hash.new 0
+
+def show
+    if $hist.keys.last > 0
+        $hist.keys.last.to_i.times do |index|
+            puts "#{index} #{$hist[index] || 0}"
+        end
+        puts
+        puts
+    end
+end
+
+pot = 1
+sum = 0
+
+t.times do |index|
+    sum += pot
+    pot <<= 1 # sum always equals to pot - 1
+    $hist[sum % (index + 2)] += 1
+    show
+end
+
+

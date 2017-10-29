@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+# prints out the sequence of 2 potencies sum mod the prime
+
+pot = 1
+sum = 0
+
+100.times do |index|
+    sum += pot
+    pot <<= 1
+    puts "#{sum % (index + 2)}"
+end
